@@ -2,6 +2,7 @@
   "scripts": {
     "start": "shopify theme dev --store=yahrzeit-box.myshopify.com",
     "start-theme-sync": "shopify theme dev --store=yahrzeit-box.myshopify.com --theme-editor-sync",
+    "format": "pnpx prettier --write .",
     "watch": "tailwind -i ./assets/tailwind.css -o ./assets/application.css --watch"
   },
   "devDependencies": {

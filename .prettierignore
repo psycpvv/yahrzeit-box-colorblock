@@ -1,0 +1,5 @@
+# Ignoring generated files
+package.json
+pnpm-lock.yaml
+assets/application.css
+*.json
