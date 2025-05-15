@@ -1,0 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-reminders-result",
+      "settings": {
+        "candle1_product": "1-candle-pack",
+        "candle2_product": "2-candle-pack",
+        "candle3_product": "3-candle-pack",
+        "candle4_product": "4-candle-pack",
+        "candle5_product": "5-candle-pack",
+        "reminder_product": "reminder"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
