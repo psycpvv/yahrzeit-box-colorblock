@@ -10,10 +10,18 @@
 {
   "sections": {
     "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "page_hebrew_calendar_GzGp8B": {
       "type": "page-hebrew-calendar",
+      "name": "Hebrew Calendar",
       "settings": {
         "subheading": "Do you know today is ${3 Heashvan 5783}?  We do, and that’s why we’re here.",
-        "heading": "<strong>Create a Yahrzeit Reminder</strong>",
+        "heading": "Create Yahrzeit Reminders",
         "description": "",
         "name_label": "Please Tell Us the Name of the Deceased Person",
         "day_of_passing_label": "What was the day of passing on the Gregorian Calendar?",
@@ -23,6 +31,7 @@
     }
   },
   "order": [
-    "main"
+    "main",
+    "page_hebrew_calendar_GzGp8B"
   ]
 }
