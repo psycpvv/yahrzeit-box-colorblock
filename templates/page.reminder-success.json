@@ -1,25 +1,94 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
-      "type": "reminder-success-page",
+      "type": "main-page",
       "settings": {
-        "subheading": "Schedule FREE Reminders. You can even order the Yahrzeit Box!",
-        "heading_submited": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
-        "subheading_size": "h1",
-        "heading": "Create Yahrzeit Reminders",
-        "heading_size": "h1",
-        "info": "Date of Passing",
-        "info2": "Choose Your Annual Reminder Events: *We have preselected the most common choice",
-        "subheading_product": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
-        "product_info": "<p><strong>What’s Inside\u2028\u2028<\/strong><\/p><p><\/p><p><strong>Every Year You Will Receive 1 Box + Free Reminders <\/strong><\/p><ul><li>- 4 Candles + Matchbook\u2028<\/li><li>- 30 Day Reminders\u2028<\/li><li>- 3 Day Reminder<\/li><li>\u2028- Day Of Reminder w\/ Sundown Time<\/li><li>\u2028- 1 Hour Before Sundown Reminder\u2028-  Prayer Card\u2028<\/li><li>- Free Shipping<\/li><\/ul>",
-        "heading_product": "Everything You Need,  Delivered to Your Door! \u202810% Of Every Purchase Goes to Israel.",
-        "info2_submited": "4 Candle Pack, Reminders Included - $34.99 - Annual Subscription",
-        "info3": "Notify Me By: *All notifications are free. Terms and Conditions",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "featured_product_yn4Edj": {
+      "type": "featured-product",
+      "blocks": {
+        "text_6PVa8M": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_Q4hLrw": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_qcHKhR": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_w7mAbN": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_YTewFa": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_ENEUyT": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_98yKKV": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_6PVa8M",
+        "title_Q4hLrw",
+        "price_qcHKhR",
+        "variant_picker_w7mAbN",
+        "quantity_selector_YTewFa",
+        "buy_buttons_ENEUyT",
+        "share_98yKKV"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "",
         "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "featured_product_yn4Edj"
+  ]
 }
