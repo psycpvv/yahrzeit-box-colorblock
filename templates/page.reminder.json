@@ -10,10 +10,10 @@
 {
   "sections": {
     "main": {
-      "type": "page-reminder",
+      "type": "main-page",
       "settings": {
-        "subheading": "Do you know today is 3 Heashvan 5783?  We do, and that’s why we’re here.",
-        "heading": "Create a Yahrzeit Reminder"
+        "padding_top": 28,
+        "padding_bottom": 28
       }
     }
   },
