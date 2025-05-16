@@ -1,0 +1,556 @@
+<div class='tw-pb-[60px]'>
+  <h5 class='tw-text-primary-text tw-text-[2rem]'>
+    Do you know today is
+    <strong>
+      <script src='https://www.hebcal.com/etc/hdate-en.js'></script></strong
+    >? We do, and that’s why we’re here.
+  </h5>
+  <h2 class='tw-text-[44px] md:tw-text-[56px] tw-py-3 tw-font-semibold tw-text-primary'>Create a Yahrzeit Reminder:</h2>
+  <h5 class='tw-text-primary-text tw-text-[2rem] tw-flex tw-flex-col tw-gap-[16px]'>
+    <div>
+      On anniversary of a loved one's passing we honor their memory by lighting a Yahrzeit candle, reciting the Kaddish
+      prayer, giving extra charity, and learning Torah.
+    </div>
+    <div>
+      Continue tradition in your Jewish home with our help. Use our FREE tool to determine the Hebrew date of your loved
+      one's yahrzeit and then the reminders you wish.
+    </div>
+    <div>
+      In Judaism, the day begins at nightfall. Before we can provide the exact Yahrtzeit we must determine if the
+      passing was before or after sundown.
+    </div>
+  </h5>
+</div>
+
+<form
+  class='tw-flex tw-flex-col tw-gap-[30px] tw-justify-center'
+  id='calender_information_form'
+  method='post'
+>
+  <div class='tw-flex tw-flex-col tw-gap-[15px]'>
+    <div class='tw-py-[14px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+      {{ section.settings.name_label }}
+    </div>
+    <div class='tw-flex md:tw-gap-[24px] tw-flex-col md:tw-flex-row tw-gap-[8px]'>
+      <div class='tw-w-full [&>.error]:tw-text-red-500 tw-flex tw-flex-col tw-items-start'>
+        <input
+          type='text'
+          placeholder='First Name (or Nickname)'
+          required
+          name='n1'
+          class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-w-full tw-text-black'
+        >
+      </div>
+      <div class='tw-w-full'>
+        <input
+          type='text'
+          placeholder='Last Name (Optional)'
+          name='n2'
+          class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-w-full tw-text-black'
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class='tw-flex tw-flex-col tw-gap-[15px]'>
+    <label for='t1' class='tw-py-[14px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+      What Type of Calendar You Want to Calculate?
+    </label>
+    <select
+      name='t1'
+      id='t1'
+      class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-w-full tw-text-black'
+    >
+      <option>Yahrzeit</option>
+      <option>Birthday</option>
+      <option>Anniversary</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <div class='tw-flex tw-flex-col tw-gap-[15px]'>
+    <div class='tw-py-[14px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+      {{ section.settings.day_of_passing_label }}
+    </div>
+    <div class='tw-flex md:tw-gap-[24px] tw-flex-col md:tw-flex-row tw-gap-[8px]'>
+      <div class='tw-w-full [&>.error]:tw-text-red-500 tw-flex tw-flex-col tw-items-start'>
+        <select
+          name='m1'
+          class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-w-full tw-text-black'
+          required
+        >
+          <option value=''>Month &gt;</option>
+          <option value='01'>January</option>
+          <option value='02'>February</option>
+          <option value='03'>March</option>
+          <option value='04'>April</option>
+          <option value='05'>May</option>
+          <option value='06'>June</option>
+          <option value='07'>July</option>
+          <option value='08'>August</option>
+          <option value='09'>September</option>
+          <option value='10'>October</option>
+          <option value='11'>November</option>
+          <option value='12'>December</option>
+        </select>
+      </div>
+      <div class='tw-w-full [&>.error]:tw-text-red-500 tw-flex tw-flex-col tw-items-start'>
+        <select
+          name='d1'
+          class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-w-full tw-text-black'
+          required
+        >
+          <option value=''>Day &gt;</option>
+          <option value='01'>1</option>
+          <option value='02'>2</option>
+          <option value='03'>3</option>
+          <option value='04'>4</option>
+          <option value='05'>5</option>
+          <option value='06'>6</option>
+          <option value='07'>7</option>
+          <option value='08'>8</option>
+          <option value='09'>9</option>
+          <option value='10'>10</option>
+          <option value='11'>11</option>
+          <option value='12'>12</option>
+          <option value='13'>13</option>
+          <option value='14'>14</option>
+          <option value='15'>15</option>
+          <option value='16'>16</option>
+          <option value='17'>17</option>
+          <option value='18'>18</option>
+          <option value='19'>19</option>
+          <option value='20'>20</option>
+          <option value='21'>21</option>
+          <option value='22'>22</option>
+          <option value='23'>23</option>
+          <option value='24'>24</option>
+          <option value='25'>25</option>
+          <option value='26'>26</option>
+          <option value='27'>27</option>
+          <option value='28'>28</option>
+          <option value='29'>29</option>
+          <option value='30'>30</option>
+          <option value='31'>31</option>
+        </select>
+      </div>
+      <div class='tw-w-full [&>.error]:tw-text-red-500 tw-flex tw-flex-col tw-items-start'>
+        <input
+          type='text'
+          inputmode='numeric'
+          placeholder='Year >'
+          size='4'
+          maxlength='4'
+          pattern='\d*'
+          name='y1'
+          class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-w-full tw-text-black'
+          required
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class='tw-flex tw-flex-col tw-gap-[15px]'>
+    <div class='tw-py-[14px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+      {{ section.settings.location_label }}
+    </div>
+    <div class='tw-flex md:tw-gap-[24px] tw-flex-col md:tw-flex-row tw-gap-[8px]'>
+      <input
+        type='text'
+        placeholder='Country >'
+        id='country'
+        class='tw-py-[14px] tw-w-full md:tw-w-[400px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+      >
+      <input
+        type='text'
+        placeholder='Enter a Zip Code'
+        name='zip'
+        class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-w-full md:tw-w-3/5 tw-text-black'
+      >
+    </div>
+  </div>
+
+  <div class='tw-flex tw-flex-col tw-gap-[15px]'>
+    <div class='tw-py-[14px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+      {{ section.settings.time_of_passing_label }}
+    </div>
+    <div class='tw-flex tw-gap-[24px]'>
+      <input
+        type='hidden'
+        name='s1'
+        value='off'
+      >
+      <button
+        type='button'
+        class='tw-py-[14px] tw-bg-black tw-text-white tw-border tw-border-[#8E9B7D] tw-font-bold tw-w-full'
+        data-value='off'
+      >
+        Before
+      </button>
+      <button
+        type='button'
+        class='tw-py-[14px] tw-bg-[#D6D2C8] tw-border tw-border-[#8E9B7D] tw-text-black tw-font-bold tw-w-full'
+        data-value='on'
+      >
+        After
+      </button>
+    </div>
+  </div>
+  <div class='tw-flex tw-flex-col tw-items-end tw-gap-[8px] md:tw-gap-[28px]'>
+    <button
+      type='submit'
+      class='tw-w-full md:tw-w-[210px] tw-py-[14px] tw-flex tw-justify-center tw-items-center tw-gap-[16px] tw-bg-[#D6D2C8] tw-border tw-border-[#8E9B7D] tw-text-black tw-font-bold'
+    >
+      <div>FINISH</div>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 100 100'
+        preserveAspectRatio='xMidYMid'
+        width='25'
+        height='25'
+        style='shape-rendering: auto; display: none; background: transparent; '
+        xmlns:xlink='http://www.w3.org/1999/xlink'
+      >
+        <g><path
+              stroke="none"
+              fill="#697e6a"
+              d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50">
+              <animateTransform
+                values="0 50 51;360 50 51"
+                keyTimes="0;1"
+                repeatCount="indefinite"
+                dur="1s"
+                type="rotate"
+                attributeName="transform"></animateTransform>
+            </path>
+            <g></g>
+          </g>
+        <!-- [ldio] generated by https://loading.io -->
+      </svg>
+    </button>
+    <button
+      type='button'
+      id='advanced_settings'
+      class='tw-w-full md:tw-w-[210px] tw-py-[14px] tw-bg-[#D6D2C8] tw-border tw-border-[#8E9B7D] tw-text-black tw-font-bold'
+    >
+      ADVANCED SETTINGS &gt;
+    </button>
+  </div>
+  <div id='advanced_settings_fields' style='display: none;'>
+    <div class='tw-flex tw-flex-col tw-gap-[44px]'>
+      <div class='tw-flex tw-flex-col md:tw-flex-row tw-gap-[16px] md:tw-gap-[30px]'>
+        <div class='tw-py-[22px] tw-w-full md:tw-w-[300px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+          Shabbat Begins
+        </div>
+        <div class='tw-flex tw-flex-col tw-justify-between'>
+          <div class='tw-flex tw-items-center tw-gap-4'>
+            <input
+              type='radio'
+              class='tw-w-[18px] tw-h-[18px]'
+              id='shabbatbeforeon'
+              checked
+              value='off'
+              name='shabbatbefore'
+            >
+            <label for='shabbatbeforeon'>Use default for this location</label>
+          </div>
+          <div class='tw-flex tw-items-center tw-gap-4'>
+            <input
+              type='radio'
+              class='tw-w-[18px] tw-h-[18px]'
+              id='shabbatbeforeoff'
+              value='on'
+              name='shabbatbefore'
+            >
+            <label for='shabbatbeforeoff' class='tw-flex tw-items-end tw-gap-[10px]'>
+              <input
+                type='text'
+                name='shabbatmbs'
+                class='tw-text-center tw-w-[60px] tw-h-[32px] tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+              >
+              minutes before sunset
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class='tw-flex tw-flex-col md:tw-flex-row tw-gap-[16px] md:tw-gap-[30px]'>
+        <div class='tw-py-[22px] tw-w-full md:tw-w-[300px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+          Shabbat Ends
+        </div>
+        <div class='tw-flex tw-flex-col tw-justify-between'>
+          <div class='tw-flex tw-items-center tw-gap-4'>
+            <input
+              type='radio'
+              class='tw-w-[18px] tw-h-[18px]'
+              id='shabbatafteron'
+              checked
+              value='off'
+              name='shabbatafter'
+            >
+            <label for='shabbatafteron'>Astronomical calculation</label>
+          </div>
+          <div class='tw-flex tw-items-center tw-gap-4'>
+            <input
+              type='radio'
+              class='tw-w-[18px] tw-h-[18px]'
+              id='shabbatafteroff'
+              value='on'
+              name='shabbatafter'
+            >
+            <label for='shabbatafteroff' class='tw-flex tw-items-end tw-gap-[10px]'>
+              <input
+                type='text'
+                name='shabbatmbs'
+                class='tw-text-center tw-w-[60px] tw-h-[32px] tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+              >
+              minutes after sunset
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class='tw-flex tw-flex-col md:tw-flex-row tw-gap-[16px] md:tw-gap-[30px]'>
+        <div class='tw-py-[22px] tw-w-full md:tw-w-[300px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'>
+          Visual Shkiah adjustment
+        </div>
+        <div class='tw-flex tw-flex-col tw-justify-between'>
+          <div class='tw-flex tw-items-center tw-gap-4'>
+            <input
+              type='radio'
+              class='tw-w-[18px] tw-h-[18px]'
+              id='shkiahoff'
+              checked
+              value='off'
+              name='shkiah'
+            >
+            <label for='shkiahoff'>Astronomical calculation</label>
+          </div>
+          <div class='tw-flex tw-items-center tw-gap-4'>
+            <input
+              type='radio'
+              class='tw-w-[18px] tw-h-[18px]'
+              id='shkiahon'
+              value='on'
+              name='shkiah'
+            >
+            <label for='shkiahon' class='tw-flex tw-items-end tw-gap-[10px]'>
+              <input
+                type='text'
+                name='shabbatmbs'
+                class='tw-text-center tw-w-[60px] tw-h-[32px] tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+              >
+              minutes after sunset
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='tw-flex tw-items-center tw-gap-4 tw-pt-[50px] tw-pb-[30px]'>
+      <input
+        type='checkbox'
+        class='tw-w-[18px] tw-h-[18px] checked:tw-accent-white checked:tw-shadow-checkbox'
+        id='useCoordinates'
+      >
+      <label for='useCoordinates'>Use Coordinates</label>
+    </div>
+    <div class='md:tw-pl-[40px] tw-flex tw-flex-col tw-gap-[24px] md:tw-gap-[12px]' id='coordinates'>
+      <div class='tw-flex tw-flex-col md:tw-flex-row tw-gap-[8px] md:tw-gap-[38px]'>
+        <label
+          for='latitude'
+          class='tw-py-[17px] tw-w-full md:tw-w-[240px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'
+        >
+          Latitude
+        </label>
+        <input
+          type='text'
+          id='latitude'
+          name='latitude'
+          class='tw-py-[14px] tw-px-[12px] tw-w-full md:tw-w-[280px] tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+        >
+      </div>
+      <div class='tw-flex tw-flex-col md:tw-flex-row tw-gap-[8px] md:tw-gap-[38px]'>
+        <label
+          for='longitude'
+          class='tw-py-[17px] tw-w-full md:tw-w-[240px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'
+        >
+          Longitude
+        </label>
+        <input
+          type='text'
+          id='longitude'
+          name='longitude'
+          class='tw-py-[14px] tw-px-[12px] tw-w-full md:tw-w-[280px] tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+        >
+      </div>
+      <div class='tw-flex tw-flex-col md:tw-flex-row tw-gap-[8px] md:tw-gap-[38px]'>
+        <label
+          for='tzname'
+          class='tw-py-[17px] tw-w-full md:tw-w-[240px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground'
+        >
+          Time Zone
+        </label>
+        <select
+          class='tw-py-[14px] tw-px-[12px] tw-w-full md:tw-w-[280px] tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+          id='tzname'
+          name='tzname'
+        >
+          <option value=''></option>
+          <option value='Etc*GMT~12'>(UTC-12:00) International Date Line West</option>
+          <option value='Etc*GMT~11'>(UTC-11:00) Coordinated Universal Time-11</option>
+          <option value='America*Adak'>(UTC-10:00) Aleutian Islands</option>
+          <option value='Etc*GMT~10'>(UTC-10:00) Hawaii</option>
+          <option value='Pacific*Marquesas'>(UTC-09:30) Marquesas Islands</option>
+          <option value='America*Anchorage'>(UTC-09:00) Alaska</option>
+          <option value='Etc*GMT~9'>(UTC-09:00) Coordinated Universal Time-09</option>
+          <option value='America*Los_Angeles'>(UTC-08:00) Pacific Time (US &amp; Canada)</option>
+          <option value='America*Santa_Isabel'>(UTC-08:00) Baja California</option>
+          <option value='Etc*GMT~8'>(UTC-08:00) Coordinated Universal Time-08</option>
+          <option value='America*Boise'>(UTC-07:00) Mountain Time (US &amp; Canada)</option>
+          <option value='America*Creston'>(UTC-07:00) Arizona</option>
+          <option value='America*Dawson'>(UTC-07:00) Yukon</option>
+          <option value='America*Bahia_Banderas'>(UTC-06:00) Guadalajara, Mexico City, Monterrey</option>
+          <option value='America*Belize'>(UTC-06:00) Central America</option>
+          <option value='America*Chicago'>(UTC-06:00) Central Time (US &amp; Canada)</option>
+          <option value='America*Chihuahua'>(UTC-06:00) La Paz, Mazatlan</option>
+          <option value='America*Regina'>(UTC-06:00) Saskatchewan</option>
+          <option value='Pacific*Easter'>(UTC-06:00) Easter Island</option>
+          <option value='America*Bogota'>(UTC-05:00) Bogota, Lima, Quito, Rio Branco</option>
+          <option value='America*Cancun'>(UTC-05:00) Chetumal</option>
+          <option value='America*Detroit'>(UTC-05:00) Eastern Time (US &amp; Canada)</option>
+          <option value='America*Grand_Turk'>(UTC-05:00) Turks and Caicos</option>
+          <option value='America*Havana'>(UTC-05:00) Havana</option>
+          <option value='America*Indiana*Marengo'>(UTC-05:00) Indiana (East)</option>
+          <option value='America*Port-au-Prince'>(UTC-05:00) Haiti</option>
+          <option value='America*Anguilla'>(UTC-04:00) Georgetown, La Paz, Manaus, San Juan</option>
+          <option value='America*Asuncion'>(UTC-04:00) Asuncion</option>
+          <option value='America*Campo_Grande'>(UTC-04:00) Cuiaba</option>
+          <option value='America*Caracas'>(UTC-04:00) Caracas</option>
+          <option value='America*Glace_Bay'>(UTC-04:00) Atlantic Time (Canada)</option>
+          <option value='America*Santiago'>(UTC-04:00) Santiago</option>
+          <option value='America*St_Johns'>(UTC-03:30) Newfoundland</option>
+          <option value='America*Araguaina'>(UTC-03:00) Araguaina</option>
+          <option value='America*Argentina*La_Rioja'>(UTC-03:00) City of Buenos Aires</option>
+          <option value='America*Bahia'>(UTC-03:00) Salvador</option>
+          <option value='America*Belem'>(UTC-03:00) Cayenne, Fortaleza</option>
+          <option value='America*Miquelon'>(UTC-03:00) Saint Pierre and Miquelon</option>
+          <option value='America*Montevideo'>(UTC-03:00) Montevideo</option>
+          <option value='America*Punta_Arenas'>(UTC-03:00) Punta Arenas</option>
+          <option value='America*Sao_Paulo'>(UTC-03:00) Brasilia</option>
+          <option value='America*Godthab'>(UTC-02:00) Greenland</option>
+          <option value='America*Noronha'>(UTC-02:00) Coordinated Universal Time-02</option>
+          <option value='America*Scoresbysund'>(UTC-01:00) Azores</option>
+          <option value='Atlantic*Cape_Verde'>(UTC-01:00) Cabo Verde Is.</option>
+          <option value='Africa*Abidjan'>(UTC+00:00) Monrovia, Reykjavik</option>
+          <option value='Africa*Sao_Tome'>(UTC+00:00) Sao Tome</option>
+          <option value='Atlantic*Canary'>(UTC+00:00) Dublin, Edinburgh, Lisbon, London</option>
+          <option value='Etc*GMT'>(UTC+00:00) Coordinated Universal Time</option>
+          <option value='Africa*Algiers'>(UTC+01:00) West Central Africa</option>
+          <option value='Africa*Casablanca'>(UTC+01:00) Casablanca</option>
+          <option value='Africa*Ceuta'>(UTC+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+          <option value='Arctic*Longyearbyen'>(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+          <option value='Europe*Belgrade'>(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+          <option value='Europe*Sarajevo'>(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+          <option value='Africa*Blantyre'>(UTC+02:00) Harare, Pretoria</option>
+          <option value='Africa*Cairo'>(UTC+02:00) Cairo</option>
+          <option value='Africa*Juba'>(UTC+02:00) Juba</option>
+          <option value='Africa*Khartoum'>(UTC+02:00) Khartoum</option>
+          <option value='Africa*Tripoli'>(UTC+02:00) Tripoli</option>
+          <option value='Africa*Windhoek'>(UTC+02:00) Windhoek</option>
+          <option value='Asia*Beirut'>(UTC+02:00) Beirut</option>
+          <option value='Asia*Famagusta'>(UTC+02:00) Athens, Bucharest</option>
+          <option value='Asia*Gaza'>(UTC+02:00) Gaza, Hebron</option>
+          <option value='Asia*Jerusalem'>(UTC+02:00) Jerusalem</option>
+          <option value='Europe*Chisinau'>(UTC+02:00) Chisinau</option>
+          <option value='Europe*Helsinki'>(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+          <option value='Europe*Kaliningrad'>(UTC+02:00) Kaliningrad</option>
+          <option value='Africa*Addis_Ababa'>(UTC+03:00) Nairobi</option>
+          <option value='Asia*Aden'>(UTC+03:00) Kuwait, Riyadh</option>
+          <option value='Asia*Amman'>(UTC+03:00) Amman</option>
+          <option value='Asia*Baghdad'>(UTC+03:00) Baghdad</option>
+          <option value='Asia*Damascus'>(UTC+03:00) Damascus</option>
+          <option value='Europe*Istanbul'>(UTC+03:00) Istanbul</option>
+          <option value='Europe*Kirov'>(UTC+03:00) Moscow, St. Petersburg</option>
+          <option value='Europe*Minsk'>(UTC+03:00) Minsk</option>
+          <option value='Europe*Volgograd'>(UTC+03:00) Volgograd</option>
+          <option value='Asia*Tehran'>(UTC+03:30) Tehran</option>
+          <option value='Asia*Baku'>(UTC+04:00) Baku</option>
+          <option value='Asia*Dubai'>(UTC+04:00) Abu Dhabi, Muscat</option>
+          <option value='Asia*Tbilisi'>(UTC+04:00) Tbilisi</option>
+          <option value='Asia*Yerevan'>(UTC+04:00) Yerevan</option>
+          <option value='Europe*Astrakhan'>(UTC+04:00) Astrakhan, Ulyanovsk</option>
+          <option value='Europe*Samara'>(UTC+04:00) Izhevsk, Samara</option>
+          <option value='Europe*Saratov'>(UTC+04:00) Saratov</option>
+          <option value='Indian*Mahe'>(UTC+04:00) Port Louis</option>
+          <option value='Asia*Kabul'>(UTC+04:30) Kabul</option>
+          <option value='Antarctica*Mawson'>(UTC+05:00) Ashgabat, Tashkent</option>
+          <option value='Asia*Karachi'>(UTC+05:00) Islamabad, Karachi</option>
+          <option value='Asia*Qyzylorda'>(UTC+05:00) Qyzylorda</option>
+          <option value='Asia*Yekaterinburg'>(UTC+05:00) Ekaterinburg</option>
+          <option value='Asia*Calcutta'>(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+          <option value='Asia*Colombo'>(UTC+05:30) Sri Jayawardenepura</option>
+          <option value='Asia*Katmandu'>(UTC+05:45) Kathmandu</option>
+          <option value='Antarctica*Vostok'>(UTC+06:00) Astana</option>
+          <option value='Asia*Dhaka'>(UTC+06:00) Dhaka</option>
+          <option value='Asia*Omsk'>(UTC+06:00) Omsk</option>
+          <option value='Asia*Rangoon'>(UTC+06:30) Yangon (Rangoon)</option>
+          <option value='Antarctica*Davis'>(UTC+07:00) Bangkok, Hanoi, Jakarta</option>
+          <option value='Asia*Barnaul'>(UTC+07:00) Barnaul, Gorno-Altaysk</option>
+          <option value='Asia*Hovd'>(UTC+07:00) Hovd</option>
+          <option value='Asia*Krasnoyarsk'>(UTC+07:00) Krasnoyarsk</option>
+          <option value='Asia*Novosibirsk'>(UTC+07:00) Novosibirsk</option>
+          <option value='Asia*Tomsk'>(UTC+07:00) Tomsk</option>
+          <option value='Asia*Brunei'>(UTC+08:00) Kuala Lumpur, Singapore</option>
+          <option value='Asia*Choibalsan'>(UTC+08:00) Ulaanbaatar</option>
+          <option value='Asia*Hong_Kong'>(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+          <option value='Asia*Irkutsk'>(UTC+08:00) Irkutsk</option>
+          <option value='Asia*Taipei'>(UTC+08:00) Taipei</option>
+          <option value='Australia*Perth'>(UTC+08:00) Perth</option>
+          <option value='Australia*Eucla'>(UTC+08:45) Eucla</option>
+          <option value='Asia*Chita'>(UTC+09:00) Chita</option>
+          <option value='Asia*Dili'>(UTC+09:00) Osaka, Sapporo, Tokyo</option>
+          <option value='Asia*Khandyga'>(UTC+09:00) Yakutsk</option>
+          <option value='Asia*Pyongyang'>(UTC+09:00) Pyongyang</option>
+          <option value='Asia*Seoul'>(UTC+09:00) Seoul</option>
+          <option value='Australia*Adelaide'>(UTC+09:30) Adelaide</option>
+          <option value='Australia*Darwin'>(UTC+09:30) Darwin</option>
+          <option value='Antarctica*DumontDUrville'>(UTC+10:00) Guam, Port Moresby</option>
+          <option value='Antarctica*Macquarie'>(UTC+10:00) Hobart</option>
+          <option value='Asia*Ust-Nera'>(UTC+10:00) Vladivostok</option>
+          <option value='Australia*Brisbane'>(UTC+10:00) Brisbane</option>
+          <option value='Australia*Melbourne'>(UTC+10:00) Canberra, Melbourne, Sydney</option>
+          <option value='Australia*Lord_Howe'>(UTC+10:30) Lord Howe Island</option>
+          <option value='Antarctica*Casey'>(UTC+11:00) Solomon Is., New Caledonia</option>
+          <option value='Asia*Magadan'>(UTC+11:00) Magadan</option>
+          <option value='Asia*Sakhalin'>(UTC+11:00) Sakhalin</option>
+          <option value='Asia*Srednekolymsk'>(UTC+11:00) Chokurdakh</option>
+          <option value='Pacific*Bougainville'>(UTC+11:00) Bougainville Island</option>
+          <option value='Pacific*Norfolk'>(UTC+11:00) Norfolk Island</option>
+          <option value='Antarctica*McMurdo'>(UTC+12:00) Auckland, Wellington</option>
+          <option value='Asia*Anadyr'>(UTC+12:00) Anadyr, Petropavlovsk-Kamchatsky</option>
+          <option value='Etc*GMT-12'>(UTC+12:00) Coordinated Universal Time+12</option>
+          <option value='Pacific*Fiji'>(UTC+12:00) Fiji</option>
+          <option value='Pacific*Chatham'>(UTC+12:45) Chatham Islands</option>
+          <option value='Etc*GMT-13'>(UTC+13:00) Coordinated Universal Time+13</option>
+          <option value='Pacific*Apia'>(UTC+13:00) Samoa</option>
+          <option value='Pacific*Tongatapu'>(UTC+13:00) Nuku'alofa</option>
+          <option value='Etc*GMT-14'>(UTC+14:00) Kiritimati Island</option>
+        </select>
+      </div>
+      <div class='tw-flex tw-flex-col md:tw-flex-row tw-gap-[8px] md:tw-gap-[38px]'>
+        <label
+          for='customname'
+          class='tw-w-full md:tw-w-[240px] tw-h-[60px] tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground tw-flex tw-justify-center tw-items-end'
+        >
+          Custom Name
+          <br>
+          *For display only
+        </label>
+        <input
+          type='text'
+          id='customname'
+          name='customname'
+          class='tw-py-[14px] tw-px-[12px] tw-w-full md:tw-w-[280px] tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+        >
+      </div>
+    </div>
+  </div>
+</form>

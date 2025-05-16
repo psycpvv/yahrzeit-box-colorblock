@@ -1,0 +1,72 @@
+<div class='tw-py-[60px] tw-font-public-sans'>
+  <div class='tw-text-center tw-mx-auto tw-max-w-[850px] tw-px-[28px]'>
+    <div id='create-a-yahrzeit-calender'>
+      {% render 'create-a-yahrzeit-calender' %}
+    </div>
+    <div id='yahrzeit-information-and-reminders' style='display: none;'>
+      {% render 'yahrzeit-information-and-reminders' %}
+    </div>
+    <div id='create-yahrzeit-reminders' style='display: none;'>
+      {% render 'create-yahrzeit-reminders' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hebrew Calendar",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "default": "Do you know today is ${3 Heashvan 5783}?  We do, and that’s why we’re here.",
+      "label": "Subheading (Use ${} for dynamic date)"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Create Yahrzeit Reminders",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "name_label",
+      "default": "Please Tell Us the Name of the Deceased Person",
+      "label": "Name Label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "day_of_passing_label",
+      "default": "What was the day of passing on the Gregorian Calendar?",
+      "label": "Day of Passing Label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "location_label",
+      "default": "Enter A Location of Passing, Anywhere in the World",
+      "label": "Location Label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "time_of_passing_label",
+      "default": "The Time Of Passing: ",
+      "label": "Time of Passing Label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hebrew Calendar"
+    }
+  ]
+}
+{% endschema %}

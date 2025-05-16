@@ -1,0 +1,294 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class='color-{{ section.settings.color_scheme }} gradient center text-center reminders'>
+  <div class='contact page-width page-width--narrow section-{{ section.id }}-padding'>
+    <div
+      id='form'
+      class='{%- if form.posted_successfully? -%} successfully-form {% else %} no-successfully-form {% endif %}'
+    >
+      <div class='no-submited succ-hide'>
+        {%- if section.settings.subheading != blank -%}
+          <h5 class='title title-wrapper--no-top-margin inline-richtext  succ-hide {{ section.settings.subheading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+            {{ section.settings.subheading }}
+          </h5>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class='title title-wrapper--no-top-margin subtitle green inline-richtext succ-hide {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+            <strong>{{ section.settings.heading }}</strong>: <span id='name-add'></span>
+          </h2>
+        {%- else -%}
+          <h2 class='visually-hidden'>{{ 'templates.contact.form.title' | t }}</h2>
+        {%- endif -%}
+        {%- if section.settings.info != blank -%}
+          <p class='title title-wrapper--no-top-margin info border-black inline-richtext succ-hide {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+            <strong>{{ section.settings.info }}</strong>
+          </p>
+        {%- endif -%}
+        {%- liquid
+          assign contact_form_class = 'isolate'
+          if settings.animations_reveal_on_scroll
+            assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
+          endif
+        -%}
+      </div>
+      <div class='submited-form no-succ-hide'>
+        {%- if section.settings.heading_submited != blank -%}
+          <h2 class='title title-wrapper--no-top-margin inline-richtext succ-hide {{ section.settings.subheading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+            <strong>{{ section.settings.heading_submited }}</strong>
+          </h2>
+        {%- else -%}
+          <h2 class='visually-hidden'>{{ 'templates.contact.form.title' | t }}</h2>
+        {%- endif -%}
+      </div>
+
+      <form data-cf-form='Qrt2Q4'></form>
+
+      <div class='reminders-options'>
+        <script>
+          $('.email').on('click', function (event) {
+            $(this).toggleClass('checked')
+          })
+          $('.phone').on('click', function (event) {
+            $(this).toggleClass('checked')
+          })
+          $('.both').on('click', function (event) {
+            $(this).toggleClass('checked')
+          })
+        </script>
+        <style>
+          .check.checked {
+            background: #000;
+            color: #fff;
+          }
+          .checkboxes {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            display: contents !important;
+          }
+          .checkboxes-custom input[type='checkbox'] {
+            width: 18px;
+            height: 18px;
+          }
+          .checkboxes-custom input[type='checkbox']:checked {
+            accent-color: #fff;
+            -webkit-box-shadow: 0px 0px 0px 1px #787878;
+            -moz-box-shadow: 0px 0px 0px 1px #787878;
+            box-shadow: 0 0 0 1px #787878;
+          }
+        </style>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .reminders-info-element.hide {
+    display: none;
+  }
+  .reminders-info-element.show {
+    display: block;
+  }
+  .save-reminder-button.add-to-cart.show {
+    display: block !important;
+  }
+</style>
+
+<!--
+  <script>
+    function myFunction()
+      {
+        var input_taker = document.getElementById('ContactForm-name').value;
+        document.getElementById('reminders-selected-add').innerHTML = input_taker;
+      }
+  </script>
+-->
+
+<script>
+  $(function () {
+    $('#ContactForm-name').keyup(function () {
+      $('#reminders-selected-add').text($(this).val())
+      $('#name-add').text($(this).val())
+    })
+  })
+</script>
+
+<script>
+  $(document).ready(function () {
+    if ($('#form').hasClass('successfully-form')) {
+      $('.save-reminder-button.add-to-cart').addClass('show')
+    }
+  })
+</script>
+
+<script>
+  $('.email').on('click', function (event) {
+    $(this).toggleClass('checked')
+  })
+  $('.phone').on('click', function (event) {
+    $(this).toggleClass('checked')
+  })
+  $('.both').on('click', function (event) {
+    $(this).toggleClass('checked')
+  })
+</script>
+
+{% schema %}
+{
+  "name": "Reminders",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "default": "Schedule FREE Reminders. You can even order the Yahrzeit Box!",
+      "label": "Subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_submited",
+      "default": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+      "label": "Heading Submited"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Create Yahrzeit Reminders",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info",
+      "default": "Date of Passing",
+      "label": "Date of Passing"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info2",
+      "default": "Choose Your Annual Reminder Events: *We have preselected the most common choice",
+      "label": "Choice"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading_product",
+      "default": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+      "label": "SubHeading Product"
+    },
+    {
+      "type": "richtext",
+      "id": "product_info",
+      "default": "<p>Product Info</p>",
+      "label": "Product Info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_product",
+      "default": "Everything You Need,  Delivered to Your Door! 10% Of Every Purchase Goes to Israel.",
+      "label": "Heading Product"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info2_submited",
+      "default": "4 Candle Pack, Reminders Included - $34.99 - Annual Subscription",
+      "label": "Choice"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info3",
+      "default": "Notify Me By: *All notifications are free. Terms and Conditions",
+      "label": "Notify Me by"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reminders"
+    }
+  ]
+}
+{% endschema %}

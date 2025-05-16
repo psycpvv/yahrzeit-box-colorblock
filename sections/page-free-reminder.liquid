@@ -1,0 +1,595 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class='color-{{ section.settings.color_scheme }} gradient center text-center reminders'>
+  <div class='contact page-width page-width--narrow section-{{ section.id }}-padding'>
+    {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
+      <div
+        id='form'
+        class='{%- if form.posted_successfully? -%} successfully-form {% else %} no-successfully-form {% endif %}'
+      >
+        <div class='no-submited succ-hide'>
+          {%- if section.settings.subheading != blank -%}
+            <h5 class='title title-wrapper--no-top-margin inline-richtext succ-hide {{ section.settings.subheading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              {{ section.settings.subheading }}
+            </h5>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class='title title-wrapper--no-top-margin subtitle green inline-richtext succ-hide {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.heading }}</strong>: <span id='name-add'></span>
+            </h2>
+          {%- else -%}
+            <h2 class='visually-hidden'>{{ 'templates.contact.form.title' | t }}</h2>
+          {%- endif -%}
+          {%- if section.settings.info != blank -%}
+            <p class='title title-wrapper--no-top-margin info border-black inline-richtext succ-hide {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.info }}</strong>
+            </p>
+          {%- endif -%}
+          {%- liquid
+            assign contact_form_class = 'isolate'
+            if settings.animations_reveal_on_scroll
+              assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
+            endif
+          -%}
+        </div>
+        <div class='submited-form no-succ-hide'>
+          {%- if section.settings.heading_submited != blank -%}
+            <h2 class='title title-wrapper--no-top-margin inline-richtext succ-hide {{ section.settings.subheading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.heading_submited }}</strong>
+            </h2>
+          {%- else -%}
+            <h2 class='visually-hidden'>{{ 'templates.contact.form.title' | t }}</h2>
+          {%- endif -%}
+        </div>
+        {%- if form.posted_successfully? -%}
+          <h2 class='form-status form-status-list form__message succ-hide no-succ-hide' tabindex='-1' autofocus>
+            {% render 'icon-success' %}
+            {{ 'templates.contact.form.post_success' | t }}
+          </h2>
+        {%- elsif form.errors -%}
+          <div class='form__message'>
+            <h2 class='form-status caption-large text-body' role='alert' tabindex='-1' autofocus>
+              {% render 'icon-error' %}
+              {{ 'templates.contact.form.error_heading' | t }}
+            </h2>
+          </div>
+          <ul class='form-status-list caption-large' role='list'>
+            <li>
+              <a href='#ContactForm-email' class='link'>
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </a>
+            </li>
+          </ul>
+        {%- endif -%}
+        <div class='contact__fieldss succ-hide'>
+          <div class='field'>
+            <input
+              class='field__input'
+              autocomplete='name'
+              type='text'
+              id='ContactForm-name'
+              name='contact[{{ 'templates.contact.form.name' | t }}]'
+              value='{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}'
+              placeholder='{{ 'templates.contact.form.name' | t }}'
+              onkeypress='myFunction()'
+            >
+            <label class='field__label' for='ContactForm-name'>{{ 'templates.contact.form.name' | t }}</label>
+          </div>
+        </div>
+        <div class='contact__fields succ-hide'>
+          <div class='field field--with-error'>
+            <input
+              autocomplete='email'
+              type='email'
+              id='ContactForm-email'
+              class='field__input'
+              name='contact[email]'
+              spellcheck='false'
+              autocapitalize='off'
+              value='{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}'
+              aria-required='true'
+              {% if form.errors contains 'email' %}
+                aria-invalid='true'
+                aria-describedby='ContactForm-email-error'
+              {% endif %}
+              placeholder='{{ 'templates.contact.form.email' | t }}'
+            >
+            <label class='field__label' for='ContactForm-email'>
+              {{- 'templates.contact.form.email' | t }}
+              <span aria-hidden='true'>*</span></label
+            >
+            {%- if form.errors contains 'email' -%}
+              <small class='contact__field-error' id='ContactForm-email-error'>
+                <span class='visually-hidden'>{{ 'accessibility.error' | t }}</span>
+                <span class='form__message'>
+                  {%- render 'icon-error' -%}
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </span>
+              </small>
+            {%- endif -%}
+          </div>
+          <div class='field'>
+            <input
+              type='tel'
+              id='ContactForm-phone'
+              class='field__input'
+              autocomplete='tel'
+              name='contact[{{ 'templates.contact.form.phone' | t }}]'
+              pattern='[0-9\-]*'
+              value='{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}'
+              placeholder='{{ 'templates.contact.form.phone' | t }}'
+            >
+            <label class='field__label' for='ContactForm-phone'>{{ 'templates.contact.form.phone' | t }}</label>
+          </div>
+        </div>
+        <div class='contact__fields_3 succ-hide'>
+          <div class='field'>
+            <input
+              class='field__input'
+              autocomplete='day'
+              type='text'
+              inputmode='numeric'
+              id='ContactForm-day'
+              name='contact[Day]'
+              value=''
+              placeholder='Day'
+              size='2'
+              maxlength='2'
+              max='31'
+              min='1'
+              pattern='\d*'
+            >
+            <label class='field__label' for='ContactForm-day'>Day</label>
+          </div>
+          <div class='field'>
+            <select name='contact[Month]' id='ContactForm-month' class='form-select'>
+              <option value='1'>01-Jan</option>
+              <option value='2'>02-Feb</option>
+              <option value='3'>03-Mar</option>
+              <option value='4'>04-Apr</option>
+              <option value='5'>05-May</option>
+              <option value='6'>06-Jun</option>
+              <option value='7'>07-Jul</option>
+              <option value='8'>08-Aug</option>
+              <option value='9'>09-Sep</option>
+              <option value='10'>10-Oct</option>
+              <option value='11'>11-Nov</option>
+              <option value='12'>12-Dec</option>
+            </select>
+          </div>
+          <div class='field'>
+            <input
+              class='field__input'
+              autocomplete='year'
+              type='text'
+              inputmode='numeric'
+              id='ContactForm-year'
+              name='contact[Year]'
+              value=''
+              placeholder='Year'
+              size='4'
+              maxlength='4'
+              pattern='\d*'
+            >
+            <label class='field__label' for='ContactForm-name'>Year</label>
+          </div>
+        </div>
+
+        <div class='reminders-options'>
+          {%- if section.settings.info2 != blank -%}
+            <p class='title title-wrapper--no-top-margin info bg-green inline-richtext succ-hide {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.info2 }}</strong>
+            </p>
+          {%- endif -%}
+
+          {%- if section.settings.subheading_product != blank -%}
+            <h3 class='title title-wrapper--no-top-margin heading-product subtitle subtitle-top inline-richtext no-succ-hide {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.subheading_product }}</strong>
+            </h3>
+          {%- endif -%}
+
+          <div class='product-info no-succ-hide'>
+            <div class='boxes'>
+              <div class='box-left empty light-green bg-green'></div>
+              <div class='box-right dark-green bg-dark-green'>
+                {%- if section.settings.product_info != blank -%}
+                  <p class='title title-wrapper--no-top-margin product-info info inline-richtext no-succ-hide {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+                    {{ section.settings.product_info }}
+                  </p>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          {%- if section.settings.heading_product != blank -%}
+            <h2 class='title title-wrapper--no-top-margin heading-product subtitle green inline-richtext no-succ-hide {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.heading_product }}</strong>
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.info2_submited != blank -%}
+            <p class='title title-wrapper--no-top-margin info bg-green inline-richtext no-succ-hide {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.info2_submited }}</strong>
+            </p>
+          {%- endif -%}
+
+          <script>
+            $(function () {
+              $('#tishrei:checked').on('click', function () {
+                $('#tishrei-info').toggleClass('hide')
+              })
+              $('#prior:checked').on('click', function () {
+                $('#prior-info').toggleClass('hide')
+              })
+              $('#shemini').on('click', function () {
+                $('#shemini-info').toggleClass('show')
+              })
+              $('#passover:checked').on('click', function () {
+                $('#passover-info').toggleClass('hide')
+              })
+              $('#shavuot:checked').on('click', function () {
+                $('#shavuot-info').toggleClass('hide')
+              })
+            })
+          </script>
+
+          <div class='checkboxes'>
+            <div class='form-checkbox check one'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Tishrei]'
+                  id='tishrei'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='tishrei'>Tishrei 1, Date of Passing</span>
+            </div>
+            <div class='form-checkbox check two'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Prior]'
+                  id='prior'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='prior'>Prior to the Fast, Beginning on Yom Kippur</span>
+            </div>
+            <div class='form-checkbox check three'>
+              <span class='radio-checkbox' id='shemini1'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Shemini]'
+                  id='shemini'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='shemini'>Shemini Atzeret</span>
+            </div>
+            <div class='form-checkbox check four'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Passover]'
+                  id='passover'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='passover'>Passover</span>
+            </div>
+            <div class='form-checkbox check five'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Shavuot]'
+                  id='shavuot'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='shavuot'>Shavuot</span>
+            </div>
+          </div>
+
+          <div class='reminders-info succ-hide'>
+            <div id='reminders-selected'>Reminders Selected for <span id='reminders-selected-add'></span></div>
+            <div id='reminders-to-receive'>You will recieve this Notifications Per Event:</div>
+            <div id='tishrei-info' class='reminders-info-element'>30 Day Prior to the Event</div>
+            <div id='prior-info' class='reminders-info-element'>3 Days Prior To The Event</div>
+            <div id='shemini-info' class='reminders-info-element hide'>Text here</div>
+            <div id='passover-info' class='reminders-info-element'>Morning of Event w/ Sundown Time Included</div>
+            <div id='shavuot-info' class='reminders-info-element'>1 Hour Before Sundown</div>
+          </div>
+
+          {%- if section.settings.info3 != blank -%}
+            <p class='title title-wrapper--no-top-margina info bg-green inline-richtext notify-me-by succ-hide {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.info3 }}</strong>
+            </p>
+          {%- endif -%}
+
+          <div class='contact__fields_3 receive-by succ-hide'>
+            <div class='field'>
+              <div class='form-checkbox check email'>
+                <span class='radio-checkbox'>
+                  <input class='form-check-input' type='checkbox' name='contact[byEmail]' id='byemail' value='by Email'>
+                  <span class='span-label'></span>
+                </span>
+                <span class='form-check-label small' for='byemail'>EMAIL</span>
+              </div>
+            </div>
+            <div class='field'>
+              <div class='form-checkbox check phone'>
+                <span class='radio-checkbox'>
+                  <input class='form-check-input' type='checkbox' name='contact[byPhone]' id='byphone' value='by Phone'>
+                  <span class='span-label'></span>
+                </span>
+                <span class='form-check-label small' for='byphone'>PHONE</span>
+              </div>
+            </div>
+            <div class='field'>
+              <div class='form-checkbox check both'>
+                <span class='radio-checkbox'>
+                  <input class='form-check-input' type='checkbox' name='contact[byBoth]' id='byboth' value='by Both'>
+                  <span class='span-label'></span>
+                </span>
+                <span class='form-check-label small' for='byboth'>BOTH</span>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            $('.email').on('click', function (event) {
+              $(this).toggleClass('checked')
+            })
+            $('.phone').on('click', function (event) {
+              $(this).toggleClass('checked')
+            })
+            $('.both').on('click', function (event) {
+              $(this).toggleClass('checked')
+            })
+          </script>
+          <style>
+            .check.checked {
+              background: #000;
+              color: #fff;
+            }
+          </style>
+        </div>
+
+        <div class='contact__button save-reminder-button succ-hide'>
+          <button type='submit' class='button'>
+            {% comment %}
+              {{ 'templates.contact.form.send' | t }}
+            {% endcomment %}
+            SAVE MY REMINDER
+          </button>
+        </div>
+
+        <!--
+          <div class="contact__button save-reminder-button no-succ-hide">
+            <a href="/products/4-candle-pack" type="submit" class="button">ADD MY BOX</a>
+          </div>
+        -->
+
+        <div class='contact__button save-reminder-button no-succ-hide'>
+          <a href='/' type='submit' class='button'>SKIP FOR NOW, REMINDERS ONLY</a>
+        </div>
+      </div>
+    {%- endform -%}
+
+    <div class='contact__button save-reminder-button add-to-cart succ-hide' style='display: none;'>
+      <!-- <a href="/products/4-candle-pack" type="submit" class="button">ADD MY BOX</a> -->
+      {% render 'candle-box-product-snippet' %}
+    </div>
+  </div>
+</div>
+<style>
+  .reminders-info-element.hide {
+    display: none;
+  }
+  .reminders-info-element.show {
+    display: block;
+  }
+  .save-reminder-button.add-to-cart.show {
+    display: block !important;
+  }
+</style>
+<script>
+  $(function () {
+    $('#ContactForm-name').keyup(function () {
+      $('#reminders-selected-add').text($(this).val())
+      $('#name-add').text($(this).val())
+    })
+  })
+</script>
+
+<script>
+  $(document).ready(function () {
+    if ($('#form').hasClass('successfully-form')) {
+      $('.save-reminder-button.add-to-cart').addClass('show')
+    }
+  })
+</script>
+
+{% schema %}
+{
+  "name": "Free Reminders",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "default": "Schedule FREE Reminders. You can even order the Yahrzeit Box!",
+      "label": "Subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_submited",
+      "default": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+      "label": "Heading Submited"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Create Yahrzeit Reminders",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info",
+      "default": "Date of Passing",
+      "label": "Date of Passing"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info2",
+      "default": "Choose Your Annual Reminder Events: *We have preselected the most common choice",
+      "label": "Choice"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading_product",
+      "default": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+      "label": "SubHeading Product"
+    },
+    {
+      "type": "richtext",
+      "id": "product_info",
+      "default": "<p>Product Info</p>",
+      "label": "Product Info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_product",
+      "default": "Everything You Need,  Delivered to Your Door! 10% Of Every Purchase Goes to Israel.",
+      "label": "Heading Product"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info2_submited",
+      "default": "4 Candle Pack, Reminders Included - $34.99 - Annual Subscription",
+      "label": "Choice"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info3",
+      "default": "Notify Me By: *All notifications are free. Terms and Conditions",
+      "label": "Notify Me by"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Free Reminders"
+    }
+  ]
+}
+{% endschema %}
