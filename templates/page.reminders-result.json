@@ -10,10 +10,14 @@
 {
   "sections": {
     "main": {
-      "type": "main-page",
+      "type": "page-reminders-result",
       "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
+        "candle1_product": "1-candle-pack",
+        "candle2_product": "2-candle-pack",
+        "candle3_product": "3-candle-pack",
+        "candle4_product": "4-candle-pack",
+        "candle5_product": "5-candle-pack",
+        "reminder_product": "reminder"
       }
     }
   },
