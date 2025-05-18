@@ -169,6 +169,27 @@
   {%- endif -%}
 </div>
 
+<script>
+  document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+      if (localStorage.getItem('reminder')) {
+        var selector = '#create_customer, #customer_login',
+          $signForm = document.querySelectorAll(selector)[0]
+
+        if ($signForm) {
+          $redirect = document.createElement('input')
+          $redirect.setAttribute('name', 'return_to')
+          $redirect.setAttribute('type', 'hidden')
+          $redirect.value = '/pages/reminders-result'
+          $signForm.appendChild($redirect)
+        }
+      }
+    },
+    false,
+  )
+</script>
+
 {% schema %}
 {
   "name": "t:sections.main-login.name",
