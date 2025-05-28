@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "main": {
+      "type": "reminder-success-page",
+      "settings": {
+        "subheading": "Schedule FREE Reminders. You can even order the Yahrzeit Box!",
+        "heading_submited": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+        "subheading_size": "h1",
+        "heading": "Create Yahrzeit Reminders",
+        "heading_size": "h1",
+        "info": "Date of Passing",
+        "info2": "Choose Your Annual Reminder Events: *We have preselected the most common choice",
+        "subheading_product": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+        "product_info": "<p><strong>What’s Inside\u2028\u2028<\/strong><\/p><p><\/p><p><strong>Every Year You Will Receive 1 Box + Free Reminders <\/strong><\/p><ul><li>- 4 Candles + Matchbook\u2028<\/li><li>- 30 Day Reminders\u2028<\/li><li>- 3 Day Reminder<\/li><li>\u2028- Day Of Reminder w\/ Sundown Time<\/li><li>\u2028- 1 Hour Before Sundown Reminder\u2028-  Prayer Card\u2028<\/li><li>- Free Shipping<\/li><\/ul>",
+        "heading_product": "Everything You Need,  Delivered to Your Door! \u202810% Of Every Purchase Goes to Israel.",
+        "info2_submited": "4 Candle Pack, Reminders Included - $34.99 - Annual Subscription",
+        "info3": "Notify Me By: *All notifications are free. Terms and Conditions",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["main"]
+}

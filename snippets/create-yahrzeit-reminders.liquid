@@ -1,0 +1,164 @@
+<div class='tw-pb-[60px]'>
+  <h5 class='tw-text-primary-text tw-text-[2rem]'>
+    Schedule <strong>Reminders</strong>. You can even order the
+    <strong>Yahrzeit Box!</strong>
+  </h5>
+  <h2 class='tw-text-[44px] md:tw-text-[56px] tw-py-3 tw-font-semibold tw-text-primary'>
+    Create Yahrzeit Reminders for Jacob Ephraim
+  </h2>
+</div>
+<form
+  class='tw-text-primary-text tw-flex tw-flex-col tw-gap-[30px] tw-items-centper'
+  id='reminders_form'
+  method='post'
+>
+  <input
+    type='hidden'
+    name='customerId'
+    value='{{ customer.id }}'
+  >
+  <div class='tw-flex tw-flex-col tw-gap-[15px]'>
+    <div class='data-of-passing tw-py-[14px] tw-border tw-border-black'>
+      Date of Passing: Tuesday, September 27, 2022 - Tishrei 3, 5783
+    </div>
+
+    <div class='tw-bg-primary tw-border tw-border-primary-light tw-text-primary-foreground tw-p-4'>
+      Choose Your Annual Reminder Events: *We have preselected the most common choice
+    </div>
+    <div class='tw-flex tw-justify-center tw-items-center tw-pt-[20px]'>
+      <div class='tw-w-full md:tw-w-[60%] tw-text-black tw-flex tw-flex-col tw-gap-8'>
+        <div class='tw-flex tw-items-center tw-gap-4'>
+          <input
+            type='checkbox'
+            class='tw-w-[18px] tw-h-[18px] checked:tw-accent-white checked:tw-shadow-checkbox'
+            id='tishrei_1_date_of_passing'
+            checked
+            name='tishrei_1_date_of_passing'
+          >
+          <label for='tishrei_1_date_of_passing'>Date of Passing</label>
+        </div>
+        <div class='tw-flex tw-items-center tw-gap-4'>
+          <input
+            type='checkbox'
+            class='tw-w-[18px] tw-h-[18px] checked:tw-accent-white checked:tw-shadow-checkbox'
+            id='prior_to_the_fast_beginning_on_yom_kippur'
+            checked
+            name='prior_to_the_fast_beginning_on_yom_kippur'
+          >
+          <label for='prior_to_the_fast_beginning_on_yom_kippur'>Prior to the Fast, Beginning on Yom Kippur</label>
+        </div>
+        <div class='tw-flex tw-items-center tw-gap-4'>
+          <input
+            type='checkbox'
+            class='tw-w-[18px] tw-h-[18px] checked:tw-accent-white checked:tw-shadow-checkbox'
+            id='shemini_atzeret'
+            checked
+            name='shemini_atzeret'
+          >
+          <label for='shemini_atzeret'>Shemini Atzeret</label>
+        </div>
+        <div class='tw-flex tw-items-center tw-gap-4'>
+          <input
+            type='checkbox'
+            class='tw-w-[18px] tw-h-[18px] checked:tw-accent-white checked:tw-shadow-checkbox'
+            id='passover'
+            checked
+            name='passover'
+          >
+          <label for='passover'>Passover</label>
+        </div>
+        <div class='tw-flex tw-items-center tw-gap-4'>
+          <input
+            type='checkbox'
+            class='tw-w-[18px] tw-h-[18px] checked:tw-accent-white checked:tw-shadow-checkbox'
+            id='shavuot'
+            checked
+            name='shavuot'
+          >
+          <label for='shavuot'>Shavuot</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='tw-w-full md:tw-w-[525px] tw-bg-[#D6D2C8] tw-border tw-border-primary tw-py-[40px] tw-mx-auto'>
+    <div>
+      <span class='notification-count'>5</span>
+      Reminders Selected for <span class='reminder-name'>Jacob Ephraim</span>
+    </div>
+    <br>
+    <div>
+      You will recieve
+      <span class='notification-count'>5</span>
+      Notifications Per Event:
+    </div>
+    <div data-id='tishrei_1_date_of_passing'>30 Day Prior to the Event</div>
+    <div data-id='prior_to_the_fast_beginning_on_yom_kippur'>3 Days Prior To The Event</div>
+    <div data-id='shemini_atzeret'>Shemini Atzeret Info</div>
+    <div data-id='passover'>Morning of Event w/ Sundown Time Included</div>
+    <div data-id='shavuot'>1 Hour Before Sundown</div>
+  </div>
+  <div class='tw-flex tw-flex-col'>
+    <div class='tw-flex tw-gap-[12px] md:tw-gap-[24px] notification_type'>
+      <button
+        type='button'
+        class='tw-py-[14px] tw-bg-[#D6D2C8] tw-border tw-border-[#8E9B7D] tw-text-black tw-font-bold tw-w-full'
+        data-value='email'
+      >
+        EMAIL
+      </button>
+      <button
+        type='button'
+        class='tw-py-[14px] tw-bg-[#D6D2C8] tw-border tw-border-[#8E9B7D] tw-text-black tw-font-bold tw-w-full'
+        data-value='sms'
+      >
+        SMS
+      </button>
+      <button
+        type='button'
+        class='tw-py-[14px] tw-bg-[#D6D2C8] tw-border tw-border-[#8E9B7D] tw-text-black tw-font-bold tw-w-full'
+        data-value='both'
+      >
+        BOTH
+      </button>
+    </div>
+    <div class='tw-w-full [&>.error]:tw-text-red-500 tw-flex tw-flex-col tw-items-start'>
+      <input
+        type='text'
+        name='notification_type'
+        required
+        class='tw-h-0 tw-opacity-0'
+        value=''
+      >
+    </div>
+  </div>
+
+  <div class='tw-flex tw-flex-col tw-gap-[15px] tw-pb-[16px]'>
+    <div class='tw-flex md:tw-gap-[24px] tw-flex-col md:tw-flex-row tw-gap-[8px]'>
+      <div class='tw-w-full [&>.error]:tw-text-red-500 tw-flex tw-flex-col tw-items-start'>
+        <input
+          type='email'
+          placeholder='Email'
+          name='email'
+          required
+          class='tw-py-[14px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black tw-w-full'
+        >
+      </div>
+      <div class='tw-w-full [&_.error]:tw-h-0 [&>.iti]:tw-w-full [&>.iti]:tw-flex [&>.iti]:tw-flex-col [&>.iti]:tw-items-start [&_.error]:tw-text-red-500 tw-flex tw-flex-col tw-items-start'>
+        <input
+          type='text'
+          placeholder='Phone Number'
+          name='phone'
+          required
+          id='phone'
+          class='tw-py-[14px] tw-w-full !tw-h-[54px] tw-text-center tw-border focus-visible:tw-outline-0 focus-visible:tw-shadow-none tw-border-black tw-text-black'
+        >
+      </div>
+    </div>
+  </div>
+  <button
+    type='submit'
+    class='tw-w-[210px] tw-py-[14px] tw-bg-[#D6D2C8] tw-border tw-border-[#8E9B7D] tw-text-black tw-mx-auto'
+  >
+    SAVE MY REMINDER
+  </button>
+</form>

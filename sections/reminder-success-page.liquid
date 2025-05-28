@@ -1,0 +1,361 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class='color-{{ section.settings.color_scheme }} gradient center text-center reminders'>
+  <div class='contact page-width page-width--narrow section-{{ section.id }}-padding'>
+    {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
+      <div
+        id='form'
+        class='{%- if form.posted_successfully? -%} successfully-forms {% else %} no-successfully-forms {% endif %}'
+      >
+        <div class='reminders-options'>
+          {%- if section.settings.subheading_product != blank -%}
+            <h3 class='title title-wrapper--no-top-margin heading-product subtitle subtitle-top inline-richtext no-succ-hides {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.subheading_product }}</strong>
+            </h3>
+          {%- endif -%}
+
+          <div class='product-info no-succ-hide'>
+            <div class='boxes'>
+              <div class='box-left empty light-green bg-green'></div>
+              <div class='box-right dark-green bg-dark-green'>
+                {%- if section.settings.product_info != blank -%}
+                  <p class='title title-wrapper--no-top-margin product-info info inline-richtext no-succ-hides {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+                    {{ section.settings.product_info }}
+                  </p>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          {%- if section.settings.heading_product != blank -%}
+            <h2 class='title title-wrapper--no-top-margin heading-product subtitle green inline-richtext no-succ-hides {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.heading_product }}</strong>
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.info2_submited != blank -%}
+            <p class='title title-wrapper--no-top-margin info bg-green inline-richtext no-succ-hides {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <strong>{{ section.settings.info2_submited }}</strong>
+            </p>
+          {%- endif -%}
+
+          <script>
+            $(function () {
+              $('#tishrei:checked').on('click', function () {
+                $('#tishrei-info').toggleClass('hide')
+              })
+              $('#prior:checked').on('click', function () {
+                $('#prior-info').toggleClass('hide')
+              })
+              $('#shemini').on('click', function () {
+                $('#shemini-info').toggleClass('show')
+              })
+              $('#passover:checked').on('click', function () {
+                $('#passover-info').toggleClass('hide')
+              })
+              $('#shavuot:checked').on('click', function () {
+                $('#shavuot-info').toggleClass('hide')
+              })
+            })
+          </script>
+
+          <div class='checkboxes' style='display: none;'>
+            <div class='form-checkbox check one'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Tishrei]'
+                  id='tishrei'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='tishrei'>Tishrei 1, Date of Passing</span>
+            </div>
+            <div class='form-checkbox check two'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Prior]'
+                  id='prior'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='prior'>Prior to the Fast, Beginning on Yom Kippur</span>
+            </div>
+            <div class='form-checkbox check three'>
+              <span class='radio-checkbox' id='shemini1'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Shemini]'
+                  id='shemini'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='shemini'>Shemini Atzeret</span>
+            </div>
+            <div class='form-checkbox check four'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Passover]'
+                  id='passover'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='passover'>Passover</span>
+            </div>
+            <div class='form-checkbox check five'>
+              <span class='radio-checkbox'>
+                <input
+                  class='form-check-input'
+                  type='checkbox'
+                  name='contact[Shavuot]'
+                  id='shavuot'
+                  checked='checked'
+                  onchange='selectionChanged(this)'
+                  value='Yes'
+                >
+                <span class='span-label'></span>
+              </span>
+              <span class='form-check-label small' for='shavuot'>Shavuot</span>
+            </div>
+          </div>
+
+          <div class='reminders-info succ-hide'>
+            <div id='reminders-selected'>Reminders Included</div>
+            <div id='reminders-to-receive'>You will recieve this Notifications Per Event:</div>
+            <div id='tishrei-info' class='reminders-info-element'>30 Day Prior to the Event</div>
+            <div id='prior-info' class='reminders-info-element'>3 Days Prior To The Event</div>
+            <div id='shemini-info' class='reminders-info-element hides'>Text here</div>
+            <div id='passover-info' class='reminders-info-element'>Morning of Event w/ Sundown Time Included</div>
+            <div id='shavuot-info' class='reminders-info-element'>1 Hour Before Sundown</div>
+          </div>
+        </div>
+
+        <div class='contact__button save-reminder-button no-succ-hide'>
+          <a href='/' type='submit' class='button'>SKIP FOR NOW, REMINDERS ONLY</a>
+        </div>
+      </div>
+    {%- endform -%}
+
+    <div class='contact__button save-reminder-button add-to-cart succ-hidea'>
+      <!-- <a href="/products/4-candle-pack" type="submit" class="button">ADD MY BOX</a> -->
+      {% render 'candle-box-product-snippet' %}
+    </div>
+  </div>
+</div>
+<style>
+  .reminders-info-element.hide {
+    display: none;
+  }
+  .reminders-info-element.show {
+    display: block;
+  }
+  .save-reminder-button.add-to-cart.show {
+    display: block !important;
+  }
+</style>
+
+<!--
+  <script>
+    function myFunction()
+      {
+        var input_taker = document.getElementById('ContactForm-name').value;
+        document.getElementById('reminders-selected-add').innerHTML = input_taker;
+      }
+  </script>
+-->
+
+<script>
+  $(function () {
+    $('#ContactForm-name').keyup(function () {
+      $('#reminders-selected-add').text($(this).val())
+      $('#name-add').text($(this).val())
+    })
+  })
+</script>
+
+<script>
+  $(document).ready(function () {
+    if ($('#form').hasClass('successfully-form')) {
+      $('.save-reminder-button.add-to-cart').addClass('show')
+    }
+  })
+</script>
+
+{% schema %}
+{
+  "name": "Free Reminders",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "default": "Schedule FREE Reminders. You can even order the Yahrzeit Box!",
+      "label": "Subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_submited",
+      "default": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+      "label": "Heading Submited"
+    },
+    {
+      "type": "select",
+      "id": "subheading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Create Yahrzeit Reminders",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info",
+      "default": "Date of Passing",
+      "label": "Date of Passing"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info2",
+      "default": "Choose Your Annual Reminder Events: *We have preselected the most common choice",
+      "label": "Choice"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading_product",
+      "default": "Your FREE REMINDERS are set. Before we finish, would you like to order a Yahrzeit Box?",
+      "label": "SubHeading Product"
+    },
+    {
+      "type": "richtext",
+      "id": "product_info",
+      "default": "<p>Product Info</p>",
+      "label": "Product Info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_product",
+      "default": "Everything You Need,  Delivered to Your Door! 10% Of Every Purchase Goes to Israel.",
+      "label": "Heading Product"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info2_submited",
+      "default": "4 Candle Pack, Reminders Included - $34.99 - Annual Subscription",
+      "label": "Choice"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "info3",
+      "default": "Notify Me By: *All notifications are free. Terms and Conditions",
+      "label": "Notify Me by"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Free Reminders"
+    }
+  ]
+}
+{% endschema %}
